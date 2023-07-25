@@ -17,8 +17,6 @@
 
    - Asegúrate de tener MongoDB instalado y en ejecución en tu sistema local o utiliza una base de datos MongoDB en la nube, como MongoDB Atlas.
 
-   - En el archivo backend/index.js, reemplaza 'mongodb://localhost:27017/mydatabase' con la URL de conexión a tu base de datos MongoDB.
-
 5. Inicia el servidor Express:
 
    - En la carpeta 'backend', ejecuta el siguiente comando:
