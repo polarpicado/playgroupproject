@@ -1,43 +1,59 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
-const ProductForm = ({ onSubmit }) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [image, setImage] = useState('');
+const ProductForm = ({ product, onSubmit }) => {
+  const [formData, setFormData] = useState({
+    name: product.name,
+    description: product.description,
+    image: product.image,
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newProduct = { name, description, image };
-    axios.post('http://localhost:5000/api/products', newProduct)
-      .then((response) => {
-        setName('');
-        setDescription('');
-        setImage('');
-        onSubmit(response.data);
-      })
-      .catch((error) => console.log(error));
+    onSubmit(formData);
   };
 
   return (
-    <div>
-      <h2>Agregar Producto</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Nombre:</label>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        </div>
-        <div>
-          <label>Descripción:</label>
-          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-        </div>
-        <div>
-          <label>Imagen:</label>
-          <input type="text" value={image} onChange={(e) => setImage(e.target.value)} />
-        </div>
-        <button type="submit">Agregar</button>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="description">Description:</label>
+        <input
+          type="text"
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label htmlFor="image">Image:</label>
+        <input
+          type="text"
+          id="image"
+          name="image"
+          value={formData.image}
+          onChange={handleChange}
+        />
+      </div>
+      <button type="submit">Save</button>
+    </form>
   );
 };
 

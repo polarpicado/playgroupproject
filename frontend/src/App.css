@@ -1,6 +1,4 @@
-/* App.css */
 
-/* Estilos generales */
 body {
   margin: 0;
   padding: 0;
@@ -13,40 +11,38 @@ body {
   min-height: 100vh;
 }
 
-/* Estilos del Navbar */
+
 .navbar {
-  background-color: #5c6bc0; /* Cambiamos el color de fondo del navbar */
+  background-color: #5c6bc0;
   padding: 10px 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between; 
 }
 
-/* Estilos del Título del Navbar */
 .navbar-title {
-  color: #fff;
   font-size: 32px;
   font-weight: bold;
   text-decoration: none;
   padding: 10px 20px;
   border-radius: 10px;
-  background-color: #3f51b5; /* Cambiamos el color de fondo del título del navbar */
+  background-color: #14C99E;
   text-transform: uppercase;
-  line-height: 1; /* Eliminamos el interlineado */
+  line-height: 1;
   transition: background-color 0.3s ease-in-out;
 }
 
 .navbar-title:hover {
-  background-color: #3949ab;
+  background-color: #0089A9;
 }
 
-/* Cambiamos el color y estilo de los enlaces */
+
 .navbar a {
   color: #fff;
   text-decoration: none;
 }
 
-/* Estilos del Footer */
+
 .footer {
   background-color: #f9f9f9;
   padding: 10px;
@@ -66,4 +62,13 @@ body {
 
 .footer a:hover {
   text-decoration: underline;
+}
+
+
+.navbar-title {
+  margin-right: auto;
+}
+
+.add-button {
+  margin-left: 10px; 
 }

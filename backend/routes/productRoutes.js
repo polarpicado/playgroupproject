@@ -1,9 +1,8 @@
-// routes/productRoutes.js
 const express = require('express');
 const router = express.Router();
 const Product = require('../models/product');
+const mongoose = require('mongoose');
 
-// Ruta para obtener todos los productos
 router.get('/', async (req, res) => {
   try {
     const products = await Product.find();
@@ -13,12 +12,10 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Ruta para obtener un producto por su identificador
 router.get('/:id', getProduct, (req, res) => {
   res.json(res.product);
 });
 
-// Ruta para crear un nuevo producto
 router.post('/', async (req, res) => {
   try {
     const { name, description, image } = req.body;
@@ -30,7 +27,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Ruta para actualizar un producto
 router.put('/:id', getProduct, async (req, res) => {
   if (req.body.name != null) {
     res.product.name = req.body.name;
@@ -50,11 +46,10 @@ router.put('/:id', getProduct, async (req, res) => {
   }
 });
 
-// Ruta para eliminar un producto
 router.delete('/:id', getProduct, async (req, res) => {
   try {
-    await res.product.remove();
-    res.json({ message: 'Product deleted' });
+    await Product.findOneAndDelete({ _id: req.params.id });
+    res.json({ message: 'Producto eliminado' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -62,9 +57,14 @@ router.delete('/:id', getProduct, async (req, res) => {
 
 async function getProduct(req, res, next) {
   try {
-    const product = await Product.findById(req.params.id);
-    if (product == null) {
-      return res.status(404).json({ message: 'Product not found' });
+    const productId = req.params.id;
+    if (!mongoose.Types.ObjectId.isValid(productId)) {
+      return res.status(404).json({ message: 'Producto no encontrado' });
+    }
+
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: 'Producto no encontrado' });
     }
     res.product = product;
     next();

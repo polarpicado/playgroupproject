@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate, Link, useParams } from 'react-router-dom';
 
-const ProductDetail = ({ match }) => {
-  const [product, setProduct] = useState(null);
+const ProductDetail = () => {
+  const { id: productId } = useParams(); 
+
+  const [productData, setProductData] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/products/${match.params.id}`)
-      .then((response) => setProduct(response.data))
+    axios.get(`http://localhost:5000/api/products/${productId}`)
+      .then((response) => setProductData(response.data))
       .catch((error) => console.log(error));
-  }, [match.params.id]);
-
-  if (!product) {
-    return <div>Cargando...</div>;
-  }
+  }, [productId]);
 
   return (
-    <div>
-      <h1>Detalles del Producto</h1>
-      <div>
-        <h3>{product.name}</h3>
-        <p>{product.description}</p>
-        <img src={product.image} alt={product.name} />
-      </div>
+    <div className="product-detail-container">
+      <h1>{productData.name}</h1>
+      <p>{productData.description}</p>
+      <img src={productData.image} alt={productData.name} />
+      <Link to={`/product/${productId}/edit`}>Editar</Link>
     </div>
   );
 };

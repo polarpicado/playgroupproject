@@ -1,4 +1,3 @@
-// index.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -17,16 +16,15 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('Connected to MongoDB');
+    console.log('Conectado a MongoDB');
   })
   .catch((err) => {
-    console.error('Error connecting to MongoDB:', err);
+    console.error('Error conectando a Mongo:', err);
   });
 
-// Define las rutas para el CRUD de productos
 const productRoutes = require('./routes/productRoutes');
 app.use('/api/products', productRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Servidor en ${PORT}`);
 });
