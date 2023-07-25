@@ -2,8 +2,9 @@
 
 - MongoDB: Base de datos NoSQL para almacenar los productos.
 - Express: Framework de Node.js para construir el backend de la API.
-- Node.js: Entorno de tiempo de ejecución para el servidor backend.
 - React: Biblioteca de JavaScript para construir la interfaz de usuario en el frontend.
+- Node.js: Entorno de tiempo de ejecución para el servidor backend.
+
 
 ## Instrucciones de configuración y levantamiento
 
